@@ -239,11 +239,11 @@ int conditional(int x, int y, int z) {
 int isLessOrEqual(int x, int y) {
   int signX=(x>>31)&0x1;
   int signY=(y>>31)&0x1;
-  int XnegYpos=signY&(~signX);
-  int XposYneg=signX&(~signY);
+  int XnegYpos=(~signY)&(signX);
+  int XposYneg=signY & (~signX);
   int result=y+(~x+1);
   int signResult=(result>>31)&0x1;
-  return XposYneg | (!XnegYpos & !signResult);
+  return XnegYpos | (!XposYneg & !signResult);
 }
 //4
 /* 
